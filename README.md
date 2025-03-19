@@ -9,6 +9,10 @@
 > 4. 템플릿 이용시 backend 삭제하고 인텔리제이로 열어서 backend생성해서 설치하기
 > 5. backend/ 에 .env 설정파일 생성, Dockerfile 생성
 
+> [세팅 참고 가이드](https://khdscor.tistory.com/116)
+
+## 도커 mysql 한글입력 설정
+
 **docker-compose.yaml 설정**
 ```
 mysql:
@@ -28,6 +32,52 @@ mysql:
        - "3307:3307"
      restart: always
 ```
-command: 부분 추가해야 한글입력가능
+command: 부분 추가해야 한글 인코딩
 
-> [세팅 참고 가이드](https://khdscor.tistory.com/116)
+---
+
+**mysql 이미지 locale 변경**
+
+1. mysql 컨테이너에 bash로 접속
+```
+docker exec -it [컨테이너명] bash
+```
+
+2. vim 설치
+```
+microdnf install -y vim
+```
+3. ko_KR.UTF-8 Locale을 사용하기위해 설치
+```
+microdnf install -y langpacks-ko
+```
+4. 로케일 설치 확인 
+```
+locale -a
+```
+5. exit으로 나온다
+
+6. backend/.env 변경
+```
+ TZ=Asia/Seoul
+ MYSQL_HOST=localhost
+ MYSQL_PORT=3307
+ MYSQL_ROOT_PASSWORD=rootpassword
+ MYSQL_DATABASE=uplog
+ MYSQL_USER=mysqluser
+ MYSQL_PASSWORD=mysqlpw
+ LANG=C.UTF-8
+ LC_ALL=C.UTF-8
+```
+이렇게
+`LANG=C.UTF-8`
+`LC_ALL=C.UTF-8`
+추가한다.
+
+7. 컨테이너 재시작
+```
+docker-compose up -d --force-recreate
+```
+
+
+
