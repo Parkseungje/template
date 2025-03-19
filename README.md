@@ -6,4 +6,5 @@
 > 1. 기본설정 완료하였습니다.
 > 2. backend와 frontend .gitignore 파일 각각 관리합니다.
 > 3. mysql port 충돌문제로 3307로 변경돼있습니다. 참고바랍니다.
-> [참고 가이드](https://khdscor.tistory.com/116)
+
+> [세팅 참고 가이드](https://khdscor.tistory.com/116)
