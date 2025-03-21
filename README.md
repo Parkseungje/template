@@ -29,7 +29,7 @@ mysql:
        - --collation-server=utf8mb4_unicode_ci
        - --skip-character-set-client-handshake
      ports:
-       - "3307:3307"
+       - "3307:3306" # 외부포트:내부포트
      restart: always
 ```
 command: 부분 추가해야 한글 인코딩
